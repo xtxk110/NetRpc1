@@ -45,7 +45,7 @@ internal sealed class FormDataHttpObjProcessor : IHttpObjProcessor
             var ms = new MemoryStream();
             await bodySec!.Body.CopyToAsync(ms);
             var body = Encoding.UTF8.GetString(ms.ToArray());
-            dataObj = Helper.ToHttpDataObj(body, item.DataObjTypeWithoutPathQueryStream!);
+            dataObj = Helper.ToHttpDataObj(body, item.IHttpObjProcessor!);
         }
         else if (item.DataObjType != null)
             dataObj = new HttpDataObj { Type = item.DataObjType };
