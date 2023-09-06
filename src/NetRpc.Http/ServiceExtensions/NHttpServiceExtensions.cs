@@ -30,6 +30,7 @@ public static class NHttpServiceExtensions
         {
             paths.ForEach(path => { i.IncludeXmlComments(path); });
             i.SchemaFilter<ExampleSchemaFilter>();
+            i.SchemaFilter<EnumSchemaFilter>();
         });
 
         services.AddControllers().AddJsonOptions(options =>
