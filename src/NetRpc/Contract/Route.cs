@@ -13,7 +13,7 @@ public sealed class HttpRoutInfo
     //https://www.cnblogs.com/speeding/p/5097790.html
 
     //private const string CR = "[\\w+&@#/%?=~_|!:,.;]";
-    private const string CR = "[\\w+&@#%?=~_|!:,.;]";
+    private const string CR = "[\\w+&@#%?=~\\-_|!:,.;]";
 
     /// <summary>
     /// lowercase
