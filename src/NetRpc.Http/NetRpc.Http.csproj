@@ -1,8 +1,14 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net7.0</TargetFrameworks>
     <SignAssembly>true</SignAssembly>
     <Description>Provide http channel implementation for NetRpc.</Description>
+    <Version>7.0.32</Version>
+    <Authors>TK</Authors>
+    <PackageProjectUrl>https://github.com/xtxk110/NetRpc1</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/xtxk110/NetRpc1</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <AssemblyName>NetRpc.Http.TK</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="SwaggerUi3\dialog\dialog.css" />
@@ -40,6 +46,12 @@
     <EmbeddedResource Include="SwaggerUi3\swagger-ui.css.map" />
     <EmbeddedResource Include="SwaggerUi3\swagger-ui.js" />
     <EmbeddedResource Include="SwaggerUi3\swagger-ui.js.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
