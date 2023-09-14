@@ -29,7 +29,7 @@ public static class Helper
     {
         WriteIndented = true,
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase), new StreamConverter() }
+        Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase), new StreamConverter(), new NumberConverter() }
     };
 
     public static string SizeSuffix(long value, int decimalPlaces = 1)

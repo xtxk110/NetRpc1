@@ -10,14 +10,14 @@ public static class ClientHelper
     {
         WriteIndented = true,
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase), new StreamConverter() }
+        Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase), new StreamConverter(), new NumberConverter() }
     };
 
     private static readonly JsonSerializerOptions JsOptionsNotIndented = new()
     {
         WriteIndented = false,
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase), new StreamConverter() }
+        Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase), new StreamConverter(), new NumberConverter() }
     };
 
     public static object? ToDtoObject(this string? str, Type t)
@@ -38,11 +38,7 @@ public static class ClientHelper
             Converters =
             {
                 new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
-                new StringToIntJsonConverter(),
-                new StringToUIntJsonConverter(),
-                new StringToLongJsonConverter(),
-                new StringToULongJsonConverter(),
-                new StringToDoubleJsonConverter()
+                new NumberConverter()
             }
         });
     }
