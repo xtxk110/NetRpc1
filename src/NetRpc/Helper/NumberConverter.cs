@@ -29,7 +29,7 @@ namespace NetRpc
         /// <summary>
         /// CreateConverter
         /// </summary>
-        public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+        public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
         {
             if (typeof(long) == typeToConvert || typeof(long?) == typeToConvert)
             {
