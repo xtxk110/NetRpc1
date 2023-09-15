@@ -3,7 +3,7 @@
     <TargetFrameworks>net7.0</TargetFrameworks>
     <SignAssembly>true</SignAssembly>
     <Description>NetRpc is a light weight rpc engine base on RabbitMQ, Grpc, Http targeting .NET7. especially suitable for handle long call.</Description>
-    <Version>7.0.33</Version>
+    <Version>7.0.34</Version>
     <PackageProjectUrl>https://github.com/xtxk110/NetRpc1</PackageProjectUrl>
     <RepositoryUrl>https://github.com/xtxk110/NetRpc1</RepositoryUrl>
 	  <AssemblyName>NetRpc.TK</AssemblyName>
