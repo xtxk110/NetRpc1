@@ -3,7 +3,7 @@
     <TargetFrameworks>net7.0</TargetFrameworks>
     <SignAssembly>true</SignAssembly>
     <Description>Provide http channel implementation for NetRpc.</Description>
-    <Version>7.0.34</Version>
+    <Version>7.0.35</Version>
     <Authors>TK</Authors>
     <PackageProjectUrl>https://github.com/xtxk110/NetRpc1</PackageProjectUrl>
     <RepositoryUrl>https://github.com/xtxk110/NetRpc1</RepositoryUrl>

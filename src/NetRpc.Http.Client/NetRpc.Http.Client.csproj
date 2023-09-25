@@ -3,7 +3,7 @@
 		<TargetFrameworks>net7.0</TargetFrameworks>
 		<Description>Provide Http client channel implementation for NetRpc.</Description>
 		<SignAssembly>true</SignAssembly>
-		<Version>7.0.34</Version>
+		<Version>7.0.35</Version>
 		<Authors>TK</Authors>
 		<PackageProjectUrl>https://github.com/xtxk110/NetRpc1</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/xtxk110/NetRpc1</RepositoryUrl>
