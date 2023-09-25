@@ -37,29 +37,43 @@ internal sealed class FormDataHttpObjProcessor : IHttpObjProcessor
         var reader = new MultipartReader(boundary, item.HttpRequest.Body);
 
         //body
-        HttpDataObj dataObj;
-        if (item.DataObjTypeWithoutPathQueryStream != null)
+        HttpDataObj? dataObj = null;
+        var fileName = string.Empty;
+        MultipartSection? bodySection = null;
+        Stream? fileStream = null;
+        var filePattern = "filename(\\*)?=";
+        do
         {
-            var bodySec = await reader.ReadNextSectionAsync();
-            ValidateSection(bodySec);
-            var ms = new MemoryStream();
-            await bodySec!.Body.CopyToAsync(ms);
-            var body = Encoding.UTF8.GetString(ms.ToArray());
-            dataObj = Helper.ToHttpDataObj(body, item.DataObjType!);
-        }
-        else if (item.DataObjType != null)
-            dataObj = new HttpDataObj { Type = item.DataObjType };
-        else
-            dataObj = new HttpDataObj();
+            bodySection = await reader.ReadNextSectionAsync();
+            if (bodySection == null)
+                continue;
+            ValidateSection(bodySection);
+            if (Regex.IsMatch(bodySection!.ContentDisposition!, filePattern))
+            {
+                fileName = GetFileName(bodySection!.ContentDisposition);
+                if (fileName == null)
+                    throw new ArgumentNullException("", "File name is null.");
+                fileStream = bodySection.Body;
+            }
+            else
+            {
+                using (var ms = new MemoryStream())
+                {
+                    await bodySection!.Body.CopyToAsync(ms);
+                    var body = Encoding.UTF8.GetString(ms.ToArray());
+                    try
+                    {
+                        dataObj = Helper.ToHttpDataObj(body, item.DataObjType!);
+                    }
+                    catch { }
+                }
 
-        //stream
-        var streamSec = await reader.ReadNextSectionAsync();
-        ValidateSection(streamSec);
-        var fileName = GetFileName(streamSec!.ContentDisposition);
-        if (fileName == null)
-            throw new ArgumentNullException("", "File name is null.");
+            }
+        } while (bodySection != null);
+
+        dataObj ??= new HttpDataObj { Type = item.DataObjType };
         dataObj.TrySetStreamName(fileName);
-        var proxyStream = new ProxyStream(streamSec.Body, dataObj.StreamLength);
+        var proxyStream = new ProxyStream(fileStream!, dataObj.StreamLength);
         return new HttpObj { HttpDataObj = dataObj, ProxyStream = proxyStream };
     }
 

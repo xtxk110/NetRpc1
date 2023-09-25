@@ -358,6 +358,9 @@ public static class Helper
 
     public static void CopyPropertiesFrom(this object toObj, object fromObj)
     {
+        if (fromObj == null)
+            return;
+
         var srcPs = fromObj.GetType().GetProperties();
         if (srcPs.Length == 0)
             return;
