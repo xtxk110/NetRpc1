@@ -40,20 +40,22 @@ internal sealed class FormDataHttpObjProcessor : IHttpObjProcessor
         HttpDataObj? dataObj = null;
         var fileName = string.Empty;
         MultipartSection? bodySection = null;
-        Stream? fileStream = null;
+        var fileStream = new MemoryStream();
         var filePattern = "filename(\\*)?=";
         do
         {
             bodySection = await reader.ReadNextSectionAsync();
             if (bodySection == null)
-                continue;
+                break;
+
             ValidateSection(bodySection);
             if (Regex.IsMatch(bodySection!.ContentDisposition!, filePattern))
             {
                 fileName = GetFileName(bodySection!.ContentDisposition);
                 if (fileName == null)
                     throw new ArgumentNullException("", "File name is null.");
-                fileStream = bodySection.Body;
+                await bodySection!.Body.CopyToAsync(fileStream);
+                fileStream.Seek(0, SeekOrigin.Begin);
             }
             else
             {
