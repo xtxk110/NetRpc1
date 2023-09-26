@@ -72,6 +72,7 @@ internal sealed class FormDataHttpObjProcessor : IHttpObjProcessor
         } while (bodySection != null);
 
         dataObj ??= new HttpDataObj { Type = item.DataObjType };
+        dataObj.StreamLength = fileStream == null ? 0 : fileStream.Length;
         dataObj.TrySetStreamName(fileName);
         var proxyStream = new ProxyStream(fileStream!, dataObj.StreamLength);
         return new HttpObj { HttpDataObj = dataObj, ProxyStream = proxyStream };
